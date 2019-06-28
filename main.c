@@ -101,41 +101,42 @@ int main(int argc, char const *argv[])
 			copy_string(auxPalavra, ptr);
 			printf("### TEXTO: %s\n", ptr );
 
-			ptr = strtok(NULL, delim);
 			if(compara(auxPalavra, cont_linha) == 0){
 
 				
 				//  insereAVL(raiz, ptr, cont_linha); 
 				// // printf(" INSERIDO: %s - %d\n", ptr, cont_linha );
 				printf("%s - Linha %d\n", auxPalavra, cont_linha);
-				// insereLISTA(lista, auxPalavra , cont_linha);
+				insereABB(auxPalavra, cont_linha, &raizABB);
+				insereLISTA(lista, auxPalavra , cont_linha);
+				insereAVL(raiz,auxPalavra, cont_linha);
 				// // printf(" INSERIDO: %s - %d\n", ptr, cont_linha );
 				//  insereABB(auxPalavra, cont_linha, &raizABB);
 				//  insereHASH(auxPalavra,cont_linha, HASH);
 			}
-
+			ptr = strtok(NULL, delim);
 		}
 	}
 	fclose(arqtexto);
 
-	// printf("\n########### LISTA ###########\n");
-	// // exibeLISTA(lista);
+	printf("\n########### LISTA ###########\n");
+	exibeLISTA(lista);
 	
 	printf("\n########### ABB ###########\n");
-	/*ABB*/
-	insereABB("banana",9, &raiz);
-	insereABB("amora",4, &raizABB);
-	insereABB("couve",3, &raizABB);
-	insereABB("banana",3, &raiz);
-	insereABB("amora",3, &raiz);
-	insereABB("flor",5, &raiz);
-	insereABB("vida",6, &raiz);
-	insereABB("a",12, &raiz);
+	emordemABB(raizABB);
+	// /*ABB*/
+	// insereABB("banana",9, &raizABB);
+	// insereABB("amora",4, &raizABB);
+	// insereABB("couve",3, &raizABB);
+	// insereABB("banana",3, &raizABB);
+	// insereABB("amora",3, &raizABB);
+	// insereABB("flor",5, &raizABB);
+	// insereABB("vida",6, &raizABB);
+	// insereABB("a",12, &raizABB);
 
 	// printf("\n\n");
 	//imprimeABB(raizABB,0);
 	//imprimeABB(raizABB, igual);
-	emordemABB(raizABB);
 	// imprime(raiz,0);
 	// printf("\n\n");
 	// imprime(raiz,1);
@@ -143,32 +144,32 @@ int main(int argc, char const *argv[])
 	// imprime(raiz,2);
 
 	printf("\n############### AVL ##############\n");
-
-
-	insereAVL(raiz, "rodrigo", 5);
-	imprimeAVL(raiz, 0);
-	printf("&*\n");
-	insereAVL(raiz,"gostoso", 3);
-	imprimeAVL(raiz, 1);
-	insereAVL(raiz,"lindo", 1);
-	imprimeAVL(raiz, 2);
-	insereAVL(raiz,"lindo", 2);
-	imprimeAVL(raiz, 3);
-	insereAVL(raiz,"amor", 1);
-	imprimeAVL(raiz, 4);
-	insereAVL(raiz,"amor", 5);
-	imprimeAVL(raiz, 5);
-	insereAVL(raiz,"vida", 6);
-	imprimeAVL(raiz, 6);
-	insereAVL(raiz,"meu", 1);
-	imprimeAVL(raiz, 7);
-	insereAVL(raiz,"amor", 1);
-	insereAVL(raiz,"gato", 1);
-	imprimeAVL(raiz, 8);
-	insereAVL(raiz,"amor", 1);
-	imprimeAVL(raiz, 9);
-	printf("#########3%s\n",raiz ->palavra );
 	exibir_ordenadoAVL(raiz);
+
+
+	// insereAVL(raiz, "rodrigo", 5);
+	// imprimeAVL(raiz, 0);
+	// printf("&*\n");
+	// insereAVL(raiz,"gostoso", 3);
+	// imprimeAVL(raiz, 1);
+	// insereAVL(raiz,"lindo", 1);
+	// imprimeAVL(raiz, 2);
+	// insereAVL(raiz,"lindo", 2);
+	// imprimeAVL(raiz, 3);
+	// insereAVL(raiz,"amor", 1);
+	// imprimeAVL(raiz, 4);
+	// insereAVL(raiz,"amor", 5);
+	// imprimeAVL(raiz, 5);
+	// insereAVL(raiz,"vida", 6);
+	// imprimeAVL(raiz, 6);
+	// insereAVL(raiz,"meu", 1);
+	// imprimeAVL(raiz, 7);
+	// insereAVL(raiz,"amor", 1);
+	// insereAVL(raiz,"gato", 1);
+	// imprimeAVL(raiz, 8);
+	// insereAVL(raiz,"amor", 1);
+	// imprimeAVL(raiz, 9);
+	// printf("#########3%s\n",raiz ->palavra );
 
 	//  printf("\n #################### HASH ####################\n");
 	// imprimeHASH(HASH);

@@ -1,6 +1,6 @@
 
 typedef struct _no{
-	char* palavra;
+	char palavra[32];
 	int linha[1000];
 	int cont;
 

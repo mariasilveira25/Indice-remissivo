@@ -28,8 +28,8 @@ void insereABB(char* palavra, int linha, no **p)
 
 	if (*p==NULL){
 		*p=(no *)malloc(sizeof(no));
-		(*p)->palavra = palavra;
-		
+		// (*p)->palavra = palavra;
+		strcpy((*p)->palavra, palavra);
 		(*p)->linha[ (*p)-> cont ]= linha;
 		(*p)->dir=NULL;
 		(*p)->esq=NULL;
