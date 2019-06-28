@@ -55,8 +55,8 @@ struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
                     aux2->pai = aux1;
                     strcpy( aux2->palavra, palavra);
                     //aux2->palavra = palavra;
-                    //aux2-> linha[raiz -> cont] = linha;
-                    //aux2->cont++; 
+                    aux2-> linha[raiz -> cont] = linha;
+                    aux2->cont++; 
 
                     break;
                 }
@@ -84,8 +84,8 @@ struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
                     aux2->pai = aux1;
                     strcpy( aux2->palavra, palavra );
                     //aux2->palavra = palavra;
-                    //aux2-> linha[raiz -> cont] = linha;
-                    //aux2->cont++; 
+                    aux2-> linha[raiz -> cont] = linha;
+                    aux2->cont++; 
                     break;
                 }
 

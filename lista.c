@@ -15,17 +15,15 @@ Lista* criaLISTA()
 void insereLISTA(Lista *lista, char* palavra, int linha)
 {
 	No *D = (No*) malloc(sizeof(No));
-	D->li = 0;
+    D->li = 0;
 
 	if(lista->inicio == NULL)
 	{
 		D->ant = NULL;
 		D->prox = NULL;
 		strcpy(D->palavra, palavra);
-		//D->palavra = palavra;
 		D->linha[D->li] = linha;
 		D->li++;
-
 		lista->inicio = D;
 		lista->fim = D;
 		lista->tam++;
@@ -35,7 +33,6 @@ void insereLISTA(Lista *lista, char* palavra, int linha)
 		D->ant = lista->fim;
 		D->prox = NULL;
 		strcpy(D->palavra, palavra);
-		//D->palavra = palavra;
 		D->linha[D->li] = linha;
 		D->li++;
 
@@ -52,8 +49,7 @@ void insereLISTA(Lista *lista, char* palavra, int linha)
 				D->ant = aux->ant;
 				D->prox = aux;
 				strcpy(D->palavra, palavra);
-				//D->palavra = palavra;
-				D->linha[D->li] = linha;
+    			D->linha[D->li] = linha;
 				D->li++;
 
 				aux->ant = D;
@@ -70,12 +66,7 @@ void insereLISTA(Lista *lista, char* palavra, int linha)
 	}
 }
 
-// int* busca(char* busca) {
-// 	No* aux = lista->inicio;
-// 	while(aux != NULL) {
-		
-// 	}
-// }
+
 
 void exibeLISTA(Lista *lista)
 {

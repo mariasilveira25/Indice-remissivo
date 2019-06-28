@@ -22,7 +22,7 @@ void inicializa(NO **HASH)
 
 void insereHASH(char* palavra ,int linha, NO **HASH) { // argumentos: palavra a ser inserido e tabela HASH
 	int num = 0; 
-	printf("%d\n", num);
+	//printf("%d\n", num);
 	for (int i = 0; i < strlen(palavra); ++i)
 	{
 		num += (palavra[i]);
@@ -67,12 +67,11 @@ void inserelista(char* palavra, int linha,NO **HASH) {
 
   		//strcpy((*lista)-> palavra, palavra);
   		(*lista)-> palavra = palavra;
-
-  	  		(*lista)-> linha[(*lista)->cont] = linha;
+  	  	(*lista)-> linha[(*lista)->cont] = linha;
   		(*lista)->cont++;
   		(*lista)->prox=NULL;
   		
-  		printf("-> Inserido HASH[%d]",pos);
+  		//printf("-> Inserido HASH[%d]",pos);
  	}
 	else { // Se ocorreu colisao
 		printf("-> Colisao  HASH[%d]",pos);
@@ -107,22 +106,21 @@ void imprimeHASH(NO **HASH) { // Imprime tabela HASH
 	{
 		if (HASH[i] != NULL)
 		{
-			printf("\n %s", HASH[i] -> palavra);
-			// for(int i = 0; i < HASH[i]->cont; i++)
-			// {
-			// 	printf("%d ", HASH[i]->linha[i]);
-			// }
+			printf("\n %s pos[%d]", HASH[i] -> palavra, i);
+		
 		}
 	}
 }
 
 int buscalista(char* palavra, NO **HASH) {
 	int num = 0; 
+
 	printf("%d\n", num);
 	for (int i = 0; i < strlen(palavra); ++i)
 	{
 		num += (palavra[i]);
 	}
+
 	int pos = num;
 	NO *lista = HASH[pos];
 	while (lista != NULL) {

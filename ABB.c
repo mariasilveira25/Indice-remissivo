@@ -31,6 +31,7 @@ void insereABB(char* palavra, int linha, no **p)
 		// (*p)->palavra = palavra;
 		strcpy((*p)->palavra, palavra);
 		(*p)->linha[ (*p)-> cont ]= linha;
+		(*p)-> cont++;
 		(*p)->dir=NULL;
 		(*p)->esq=NULL;
 		(*p)->pai = auxPai;
