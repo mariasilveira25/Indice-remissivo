@@ -12,18 +12,20 @@ Lista* criaLISTA()
 	return P;
 }
 
-void insereLISTA(Lista *lista, char* palavra, int linha)
+void insereLISTA(Lista *lista, char palavra[32], int linha)
 {
 	No *D = (No*) malloc(sizeof(No));
-    D->li = 0;
+	D->li = 0;
 
 	if(lista->inicio == NULL)
 	{
 		D->ant = NULL;
 		D->prox = NULL;
 		strcpy(D->palavra, palavra);
+		//D->palavra = palavra;
 		D->linha[D->li] = linha;
 		D->li++;
+
 		lista->inicio = D;
 		lista->fim = D;
 		lista->tam++;
@@ -33,11 +35,24 @@ void insereLISTA(Lista *lista, char* palavra, int linha)
 		D->ant = lista->fim;
 		D->prox = NULL;
 		strcpy(D->palavra, palavra);
+		//D->palavra = palavra;
 		D->linha[D->li] = linha;
 		D->li++;
 
-		lista->fim->prox = D;
+		lista->fim->prox = D;		
 		lista->fim = D;
+		lista->tam++;
+	}
+	// primeira palavra da lista 
+	else if (strcmp(lista->inicio->palavra, palavra) > 0) {
+		D->ant = NULL;
+		D->prox = lista->inicio;
+		strcpy(D->palavra, palavra);
+		//D->palavra = palavra;
+		D->linha[D->li] = linha;
+		D->li++;
+
+		lista->inicio = D;
 		lista->tam++;
 	}
 	else {
@@ -45,14 +60,16 @@ void insereLISTA(Lista *lista, char* palavra, int linha)
 		while(aux != NULL) {
 			// inserir antes do aux
 			// palavra da lista menor que a palavra informada
-			if ((strcmp(aux->palavra, palavra) < 0) && (strcmp(aux->prox->palavra, palavra) > 0)) {	
-				D->ant = aux->ant;
-				D->prox = aux;
+			if ((strcmp(aux->palavra, palavra) < 0) && (strcmp(aux->prox->palavra, palavra) > 0)) {
+				D->ant = aux;
+				D->prox = aux->prox;
 				strcpy(D->palavra, palavra);
-    			D->linha[D->li] = linha;
+				//D->palavra = palavra;
+				D->linha[D->li] = linha;
 				D->li++;
 
-				aux->ant = D;
+				aux->prox->ant = D;
+				aux->prox = D;
 				lista->tam += 1;
 				return;
 			}
@@ -66,7 +83,12 @@ void insereLISTA(Lista *lista, char* palavra, int linha)
 	}
 }
 
-
+// int* busca(char* busca) {
+// 	No* aux = lista->inicio;
+// 	while(aux != NULL) {
+		
+// 	}
+// }
 
 void exibeLISTA(Lista *lista)
 {

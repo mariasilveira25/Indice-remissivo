@@ -10,7 +10,8 @@
 
 int compara(char* ptr, int cont_linha)
 {
-	FILE* arqPalavra = fopen("palavras.txt", "rt");
+	// FILE* arqPalavra = fopen("palavras.txt", "rt");
+	FILE* arqPalavra = fopen("chave.txt", "rt");
 	char texto_str[256];
 
 	
@@ -53,6 +54,10 @@ void copy_string(char *target, char *source) {
 	*target = '\0';
 }
 
+// void rodaEstrutura() {
+	
+// } 
+
 int main(int argc, char const *argv[])
 {
 	char delim[] = " ";
@@ -65,7 +70,8 @@ int main(int argc, char const *argv[])
     funcaohash(846.5);
 	inicializa(HASH);
 
-	FILE* arqtexto = fopen("texto.txt", "rt");
+	// FILE* arqtexto = fopen("texto.txt", "rt");
+	FILE* arqtexto = fopen("teste.txt", "rt");
 	if(arqtexto == NULL)
 	{
 	    printf("ERRO - algum arquivo não existe \n");
@@ -81,6 +87,7 @@ int main(int argc, char const *argv[])
 		while(ptr != NULL)
 		{
 			copy_string(auxPalavra, ptr);
+
 			if((compara(auxPalavra, cont_linha) == 0)&&(strlen(auxPalavra) >=4) && (strlen(auxPalavra)<32)){
 
 			
@@ -115,25 +122,36 @@ int main(int argc, char const *argv[])
 	}
 	fclose(arqtexto);
 
+	FILE *arqSaida = fopen("saida.txt","w");
+
 	printf("\n########### LISTA ###########\n");
 	printf("Tempo gasto para a lista: %g ms.\n", Tempo1);
+	fprintf(arqSaida, "\n########### LISTA ###########\n");
+	fprintf(arqSaida, "Tempo gasto para a lista: %g ms.\n", Tempo1);
 	exibeLISTA(lista);
 	
 	printf("\n########### ABB ###########\n");
 	printf("Tempo gasto para a arvore binaria: %g ms.\n", Tempo);
+	fprintf(arqSaida, "\n########### ABB ###########\n");
+	fprintf(arqSaida, "Tempo gasto para a arvore binaria: %g ms.\n", Tempo);
 	emordemABB(raizABB);
 	imprimeABB(raizABB,0);
 
 
 	printf("\n############### AVL ##############\n");
 	printf("Tempo gasto para a AVL: %g ms.\n", Tempo2);
+	fprintf(arqSaida, "\n############### AVL ##############\n");
+	fprintf(arqSaida, "Tempo gasto para a AVL: %g ms.\n", Tempo2);
 	exibir_ordenadoAVL(raiz);
 
 	printf("\n #################### HASH ####################\n");
 	printf("Tempo gasto para a HASH: %g ms.\n", Tempo3);
+	fprintf(arqSaida, "\n #################### HASH ####################\n");
+	fprintf(arqSaida, "Tempo gasto para a HASH: %g ms.\n", Tempo3);
 	imprimeHASH(HASH);
 	printf("\n");
 
+	fclose(arqSaida);
 	return 0;
 
 }

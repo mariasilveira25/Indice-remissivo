@@ -39,26 +39,20 @@ void insereABB(char* palavra, int linha, no **p)
 	else
 	{
 
-
 		if (strcmp(palavra,(*p)->palavra) == 0)
-		{
-			
-			auxPai = *p;
+		{			
 			(*p)->linha[(*p)->cont] = linha;
 			(*p) -> cont++;
-
 		}
 
-		if(strcmp( palavra, (*p)->palavra ) > 0);
+		if(strcmp( palavra, (*p)->palavra ) > 0)
 		{
-			
 			auxPai = *p;
 			insereABB(palavra,linha, &(*p)->dir);
 		}
 
 		if(strcmp( palavra, (*p)->palavra ) < 0)
 		{
-			
 			auxPai = *p;
 			insereABB(palavra,linha, &(*p)->esq);
 		}

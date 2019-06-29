@@ -9,7 +9,7 @@ tome
 Vossa
 Alteza
 minha
-ignorância
+ignorancia
 por
 boa
 vontade
@@ -32,4 +32,4 @@ manha
 fizemos
 vela
 e
-seguimos 
+seguimos

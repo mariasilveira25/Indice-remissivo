@@ -5,7 +5,7 @@
 #include<string.h>
 #include"AVL.h"
 
-struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
+struct arvore* insereAVL(struct arvore *aux1, char palavra[32], int linha)
 {
     struct arvore *aux2 = NULL;
 
@@ -14,7 +14,7 @@ struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
         raiz = (struct arvore*) malloc(sizeof(struct arvore));
 
         strcpy( raiz->palavra, palavra );
-        raiz-> linha[raiz -> cont] = linha;
+        raiz-> linha[raiz->cont] = linha;
         raiz->cont++; 
         raiz->esquerda = NULL;
         raiz->direita = NULL;
@@ -28,10 +28,10 @@ struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
         aux2 = aux1;
 
         while(aux2){
-            
+
             if (strcmp( palavra, aux2->palavra ) == 0)
             {
-                aux2-> linha[raiz -> cont] = linha;
+                aux2-> linha[aux2 -> cont] = linha;
                 aux2->cont++; 
 
                 break;
@@ -56,7 +56,7 @@ struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
                     aux2->pai = aux1;
                     strcpy( aux2->palavra, palavra);
                     //aux2->palavra = palavra;
-                    aux2-> linha[raiz -> cont] = linha;
+                    aux2-> linha[aux2 -> cont] = linha;
                     aux2->cont++; 
 
                     break;
@@ -85,7 +85,7 @@ struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
                     aux2->pai = aux1;
                     strcpy( aux2->palavra, palavra );
                     //aux2->palavra = palavra;
-                    aux2-> linha[raiz -> cont] = linha;
+                    aux2-> linha[aux2 -> cont] = linha;
                     aux2->cont++; 
                     break;
                 }
