@@ -54,24 +54,20 @@ void copy_string(char *target, char *source) {
 	*target = '\0';
 }
 
-// void rodaEstrutura() {
-	
-// } 
+double rodaEstrutura(int numEstrutura, char* arqEntrada) {
 
-int main(int argc, char const *argv[])
-{
 	char delim[] = " ";
 	char texto_str[256];
 	char *ptr = malloc(32 * sizeof(*ptr));
 	char *auxPalavra = malloc(32 * sizeof(*auxPalavra));
 	Lista* lista = criaLISTA();
-	double Tempo, Tempo1, Tempo2, Tempo3;
+	double tempo;
 	NO *HASH[TAM_MAX];
     funcaohash(846.5);
 	inicializa(HASH);
 
 	// FILE* arqtexto = fopen("texto.txt", "rt");
-	FILE* arqtexto = fopen("teste.txt", "rt");
+	FILE* arqtexto = fopen(arqEntrada, "rt");
 	if(arqtexto == NULL)
 	{
 	    printf("ERRO - algum arquivo não existe \n");
@@ -79,6 +75,8 @@ int main(int argc, char const *argv[])
 	}
 
 	int	cont_linha = 0;
+	int numInsercoes = 0;
+	clock_t Ticks[2], Ticks1[2], Ticks2[2], Ticks3[2];
 	while(fgets(texto_str, 256, arqtexto) != NULL) 
 	{
 
@@ -91,64 +89,114 @@ int main(int argc, char const *argv[])
 			if((compara(auxPalavra, cont_linha) == 0)&&(strlen(auxPalavra) >=4) && (strlen(auxPalavra)<32)){
 
 			
-				printf("%s - Linha %d\n", auxPalavra, cont_linha);
+				// printf("%s - Linha %d\n", auxPalavra, cont_linha);
 
-				clock_t Ticks[2];
-    			Ticks[0] = clock();
-				insereABB(auxPalavra, cont_linha, &raizABB);
-			    Ticks[1] = clock();
-				Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
-
-    			clock_t Ticks1[2];
-    			Ticks1[0] = clock();	
-				insereLISTA(lista, auxPalavra , cont_linha);
-				Ticks1[1] = clock();
-				Tempo1 = (Ticks1[1] - Ticks1[0]) * 1000.0 / CLOCKS_PER_SEC;
-
-				clock_t Ticks2[2];
-    			Ticks2[0] = clock();
-				insereAVL(raiz,auxPalavra, cont_linha);
-				Ticks2[1] = clock();
-				Tempo2 = (Ticks2[1] - Ticks2[0]) * 1000.0 / CLOCKS_PER_SEC;
-
-				clock_t Ticks3[2];
-    			Ticks3[0] = clock();
-				insereHASH(auxPalavra,cont_linha, HASH);
-				Ticks3[1] = clock();
-				Tempo3 = (Ticks3[1] - Ticks3[0]) * 1000.0 / CLOCKS_PER_SEC;
+				switch (numEstrutura) {
+					// Arvore ABB
+					case 1:
+		    			Ticks[0] = clock();
+						insereABB(auxPalavra, cont_linha, &raizABB);
+					    Ticks[1] = clock();
+						tempo += (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
+						numInsercoes++;
+						break;
+					// LISTA
+					case 2:
+		    			Ticks1[0] = clock();	
+						insereLISTA(lista, auxPalavra , cont_linha);
+						Ticks1[1] = clock();
+						tempo += (Ticks1[1] - Ticks1[0]) * 1000.0 / CLOCKS_PER_SEC;
+						numInsercoes++;
+						break;
+					// Arvore AVL
+					case 3:
+		    			Ticks2[0] = clock();
+						insereAVL(raiz,auxPalavra, cont_linha);
+						Ticks2[1] = clock();
+						tempo += (Ticks2[1] - Ticks2[0]) * 1000.0 / CLOCKS_PER_SEC;
+						numInsercoes++;
+						break;
+					// HASH
+					case 4:
+		    			Ticks3[0] = clock();
+						insereHASH(auxPalavra,cont_linha, HASH);
+						Ticks3[1] = clock();
+						tempo += (Ticks3[1] - Ticks3[0]) * 1000.0 / CLOCKS_PER_SEC;
+						numInsercoes++;
+						break;
+					case 5:
+						break;
+					case 6:
+						break;
+					case 7:
+						break;
+				}
 			}
 			ptr = strtok(NULL, delim);
 		}
 	}
 	fclose(arqtexto);
+	return tempo/numInsercoes;
+
+} 
+
+int main(int argc, char const *argv[])
+{
 
 	FILE *arqSaida = fopen("saida.txt","w");
+	int numInteracoes = 100;
+	double somaLISTA = 0;
+	double somaABB = 0;
+	double somaAVL = 0;
+	double somaHASH = 0;
+	char* arqEntrada = "teste.txt";
+
+	// ##################################################################### //
+	fprintf(arqSaida, "\n########### LISTA ###########\n");
+	for (int i = 0; i < numInteracoes; i++) {
+		somaLISTA += rodaEstrutura(2, arqEntrada);
+	}
+	fprintf(arqSaida, "Tempo gasto para a lista: %g ms.\n", somaLISTA/numInteracoes);
 
 	printf("\n########### LISTA ###########\n");
-	printf("Tempo gasto para a lista: %g ms.\n", Tempo1);
-	fprintf(arqSaida, "\n########### LISTA ###########\n");
-	fprintf(arqSaida, "Tempo gasto para a lista: %g ms.\n", Tempo1);
-	exibeLISTA(lista);
+	printf("Tempo gasto para a lista: %g ms.\n", somaLISTA/numInteracoes);
+	// exibeLISTA(lista);
 	
-	printf("\n########### ABB ###########\n");
-	printf("Tempo gasto para a arvore binaria: %g ms.\n", Tempo);
+	// ##################################################################### //
 	fprintf(arqSaida, "\n########### ABB ###########\n");
-	fprintf(arqSaida, "Tempo gasto para a arvore binaria: %g ms.\n", Tempo);
-	emordemABB(raizABB);
-	imprimeABB(raizABB,0);
+	for (int i = 0; i < numInteracoes; i++) {
+		somaABB += rodaEstrutura(1, arqEntrada);
+	}
+	fprintf(arqSaida, "Tempo gasto para a árvore binária (ABB): %g ms.\n", somaABB/numInteracoes);
 
+	printf("\n########### ABB ###########\n");
+	printf("Tempo gasto para a arvore binaria: %g ms.\n", somaABB/numInteracoes);
+	// emordemABB(raizABB);
+	// imprimeABB(raizABB,0);
 
-	printf("\n############### AVL ##############\n");
-	printf("Tempo gasto para a AVL: %g ms.\n", Tempo2);
+	// ##################################################################### //
+
 	fprintf(arqSaida, "\n############### AVL ##############\n");
-	fprintf(arqSaida, "Tempo gasto para a AVL: %g ms.\n", Tempo2);
-	exibir_ordenadoAVL(raiz);
+	for (int i = 0; i < numInteracoes; i++) {
+		somaAVL += rodaEstrutura(3, arqEntrada);
+	}
+	fprintf(arqSaida, "Tempo gasto para a AVL: %g ms.\n", somaAVL/numInteracoes);
+	
+	printf("\n############### AVL ##############\n");
+	printf("Tempo gasto para a AVL: %g ms.\n", somaAVL/numInteracoes);
+	// exibir_ordenadoAVL(raiz);
 
-	printf("\n #################### HASH ####################\n");
-	printf("Tempo gasto para a HASH: %g ms.\n", Tempo3);
+	// ##################################################################### //
+	
 	fprintf(arqSaida, "\n #################### HASH ####################\n");
-	fprintf(arqSaida, "Tempo gasto para a HASH: %g ms.\n", Tempo3);
-	imprimeHASH(HASH);
+	for (int i = 0; i < numInteracoes; i++) {
+		somaHASH += rodaEstrutura(4, arqEntrada);
+	}
+	fprintf(arqSaida, "Tempo gasto para a HASH: %g ms.\n", somaHASH/numInteracoes);
+	
+	printf("\n #################### HASH ####################\n");
+	printf("Tempo gasto para a HASH: %g ms.\n", somaHASH/numInteracoes);
+	// imprimeHASH(HASH);
 	printf("\n");
 
 	fclose(arqSaida);

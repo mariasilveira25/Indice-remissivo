@@ -33,7 +33,7 @@ void insereHASH(char* palavra ,int linha, NO **HASH) { // argumentos: palavra a 
 		
 		if (buscalista(palavra,HASH)) { // verificando se a chave ja existe
 			
-			printf(" *** ATENCAO O palavra %s ja foi cadastrado ***", palavra);
+			// printf(" *** ATENCAO O palavra %s ja foi cadastrado ***", palavra);
 			(HASH[pos]) -> linha[(HASH[pos]) -> cont] = linha;
 			(HASH[pos]) -> cont++;
 			
@@ -47,7 +47,7 @@ void insereHASH(char* palavra ,int linha, NO **HASH) { // argumentos: palavra a 
 void inserelista(char* palavra, int linha,NO **HASH) {
 	
 	int num = 0; 
-	printf("%d\n", num);
+	// printf("%d\n", num);
 	for (int i = 0; i < strlen(palavra); ++i)
 	{
 		num += (palavra[i]);
@@ -55,7 +55,6 @@ void inserelista(char* palavra, int linha,NO **HASH) {
 
 	int pos = num;
 	NO **lista = &HASH[pos];
-	printf("%d\n", pos);
 	
 	if (*lista == NULL) {
 			*lista = (NO *) malloc(sizeof(NO));
@@ -63,7 +62,6 @@ void inserelista(char* palavra, int linha,NO **HASH) {
 			printf("\nErro alocacao memoria!");
 			exit(1);
   		}
-  		printf("%s\n",palavra );
 
   		strcpy((*lista)-> palavra, palavra);
   		//(*lista)-> palavra = palavra;
@@ -74,7 +72,7 @@ void inserelista(char* palavra, int linha,NO **HASH) {
   		//printf("-> Inserido HASH[%d]",pos);
  	}
 	else { // Se ocorreu colisao
-		printf("-> Colisao  HASH[%d]",pos);
+		// printf("-> Colisao  HASH[%d]",pos);
 	
 	    NO *guarda= HASH[pos]; // guardando posicao inicial ponteiro
 		while ((*lista)->prox != NULL) 
@@ -119,7 +117,7 @@ void imprimeHASH(NO **HASH) { // Imprime tabela HASH
 int buscalista(char* palavra, NO **HASH) {
 	int num = 0; 
 
-	printf("%d\n", num);
+	// printf("%d\n", num);
 	for (int i = 0; i < strlen(palavra); ++i)
 	{
 		num += (palavra[i]);

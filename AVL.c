@@ -97,8 +97,6 @@ struct arvore* insereAVL(struct arvore *aux1, char palavra[32], int linha)
         }
     }
 
-    printf("Elemento Inserido!\n");
-
     if(aux2){
         while(aux2){
             aux2->fb = alturaAVL(aux2->direita) - alturaAVL(aux2->esquerda);
