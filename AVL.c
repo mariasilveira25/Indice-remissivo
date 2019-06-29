@@ -28,6 +28,7 @@ struct arvore* insereAVL(struct arvore *aux1, char* palavra, int linha)
         aux2 = aux1;
 
         while(aux2){
+            
             if (strcmp( palavra, aux2->palavra ) == 0)
             {
                 aux2-> linha[raiz -> cont] = linha;

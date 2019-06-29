@@ -33,7 +33,7 @@ void insereHASH(char* palavra ,int linha, NO **HASH) { // argumentos: palavra a 
 		
 		if (buscalista(palavra,HASH)) { // verificando se a chave ja existe
 			
-			//printf(" *** ATENCAO O palavra %s ja foi cadastrado ***", palavra);
+			printf(" *** ATENCAO O palavra %s ja foi cadastrado ***", palavra);
 			(HASH[pos]) -> linha[(HASH[pos]) -> cont] = linha;
 			(HASH[pos]) -> cont++;
 			
@@ -65,8 +65,8 @@ void inserelista(char* palavra, int linha,NO **HASH) {
   		}
   		printf("%s\n",palavra );
 
-  		//strcpy((*lista)-> palavra, palavra);
-  		(*lista)-> palavra = palavra;
+  		strcpy((*lista)-> palavra, palavra);
+  		//(*lista)-> palavra = palavra;
   	  	(*lista)-> linha[(*lista)->cont] = linha;
   		(*lista)->cont++;
   		(*lista)->prox=NULL;
@@ -89,7 +89,7 @@ void inserelista(char* palavra, int linha,NO **HASH) {
   		}
   		
 		*lista=(*lista)->prox;
-  		(*lista)->palavra=palavra;
+  		strcpy((*lista)->palavra,palavra);
   		(*lista)-> linha[(*lista)->cont] = linha;
   		(*lista)->cont++;
   		(*lista)->prox=NULL; 
@@ -106,7 +106,11 @@ void imprimeHASH(NO **HASH) { // Imprime tabela HASH
 	{
 		if (HASH[i] != NULL)
 		{
-			printf("\n %s pos[%d]", HASH[i] -> palavra, i);
+			printf("\n %s pos[%d] \n", HASH[i] -> palavra, i);
+			for (int j = 0; j < (HASH[i]) -> cont; ++j)
+			{
+				printf("%d\n",(HASH[i]) -> linha[j] );
+			}
 		
 		}
 	}

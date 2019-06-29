@@ -1,6 +1,6 @@
 struct reg {
 	int linha[1000], cont; 
-	char*  palavra;
+	char*  palavra[32];
 	struct reg *prox; 
 };
 typedef struct reg NO;
