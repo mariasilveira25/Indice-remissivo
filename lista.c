@@ -1,8 +1,20 @@
+/*
+*   Lista
+*
+*   Metodos da lista
+*
+*	Alunos: Elias Eduardo Silva Rodrigues, 0015920
+*			Maria Eduarda da Silveira,     0035483
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include "lista.h"
 
+/*
+*	Metodo que cria a lista com uma celula cabeca.
+*/
 Lista* criaLISTA()
 {
 	Lista *P = (Lista*) malloc(sizeof(Lista));
@@ -12,11 +24,17 @@ Lista* criaLISTA()
 	return P;
 }
 
+/*
+*	Metodo para inserir uma celula na lista.
+*	A celula eh inserida com uma palavra e a linha
+*	one ela aparece.
+*/
 void insereLISTA(Lista *lista, char palavra[32], int linha)
 {
 	No *D = (No*) malloc(sizeof(No));
 	D->li = 0;
 
+	/* Se a lista estiver vazia, insere a primeira celula. */
 	if(lista->inicio == NULL)
 	{
 		D->ant = NULL;
@@ -30,7 +48,11 @@ void insereLISTA(Lista *lista, char palavra[32], int linha)
 		lista->fim = D;
 		lista->tam++;
 	}
-	// ultima palavra da lista menor que a palavra informada
+
+	/*
+	*	Se a ultima palavra da lista for menor que a palavra
+	*	informada uma celula eh criada no final.
+	*/
 	else if (strcmp(lista->fim->palavra, palavra) < 0) {
 		D->ant = lista->fim;
 		D->prox = NULL;
@@ -43,7 +65,11 @@ void insereLISTA(Lista *lista, char palavra[32], int linha)
 		lista->fim = D;
 		lista->tam++;
 	}
-	// primeira palavra da lista 
+
+	/*
+	*	Se a ultima palavra da lista for maior que a palavra
+	*	informada uma celula eh criada no comeco.
+	*/
 	else if (strcmp(lista->inicio->palavra, palavra) > 0) {
 		D->ant = NULL;
 		D->prox = lista->inicio;
@@ -74,6 +100,9 @@ void insereLISTA(Lista *lista, char palavra[32], int linha)
 				return;
 			}
 			else if (strcmp(aux->palavra, palavra) == 0) {
+				/*
+				*	Se a palavra ja existir apenas acrescenta a linha que ela aparece.
+				*/
 				aux->linha[aux->li] = linha;
 				aux->li++;
 				return;
@@ -83,13 +112,9 @@ void insereLISTA(Lista *lista, char palavra[32], int linha)
 	}
 }
 
-// int* busca(char* busca) {
-// 	No* aux = lista->inicio;
-// 	while(aux != NULL) {
-		
-// 	}
-// }
-
+/*
+*	Metodo para exibir a lista do comeco ao fim.
+*/
 void exibeLISTA(Lista *lista)
 {
 	No* aux = lista->inicio;

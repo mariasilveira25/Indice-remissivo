@@ -1,12 +1,3 @@
 
-########### LISTA ###########
-Tempo gasto para a lista: 0.001 ms.
-
-########### ABB ###########
-Tempo gasto para a arvore binaria: 0.001 ms.
-
 ############### AVL ##############
-Tempo gasto para a AVL: 0.005 ms.
-
- #################### HASH ####################
-Tempo gasto para a HASH: 0.005 ms.
+Tempo gasto para a AVL: 0.198734 ms.

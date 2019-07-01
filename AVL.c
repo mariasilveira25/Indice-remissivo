@@ -1,16 +1,28 @@
-
 //https://github.com/viniciusmarangoni/AVL-Tree/blob/master/avl.c
+/*
+*   Arvore AVL
+*
+*   Metodos da arvore AVL
+*
+*   Alunos: Elias Eduardo Silva Rodrigues, 0015920
+*           Maria Eduarda da Silveira,     0035483
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
 #include"AVL.h"
 
+/* 
+*   Estrutura para inserir um no na arvore. Esse no contem uma palavra
+*   e os numeros das linhas que a palavra aparece.
+*/
 struct arvore* insereAVL(struct arvore *aux1, char palavra[32], int linha)
 {
     struct arvore *aux2 = NULL;
 
     if(!raiz){
-
+        /* Insere o primeiro no na arvore. */
         raiz = (struct arvore*) malloc(sizeof(struct arvore));
 
         strcpy( raiz->palavra, palavra );
@@ -27,18 +39,23 @@ struct arvore* insereAVL(struct arvore *aux1, char palavra[32], int linha)
         aux1 = raiz;
         aux2 = aux1;
 
-        while(aux2){
-
+        /* 
+        *   Compara se a palavra a ser inserida ja esta na arvore.
+        *   Se ja estiver apenas acrescenta a linha em que ela apareceu.
+        */
+        while (aux2) {
             if (strcmp( palavra, aux2->palavra ) == 0)
             {
                 aux2-> linha[aux2 -> cont] = linha;
                 aux2->cont++; 
 
                 break;
-            }
-
-            else if(strcmp( palavra, aux2->palavra ) < 0){
-
+            } else if(strcmp( palavra, aux2->palavra ) < 0){
+                /* 
+                *   Se a palavra nao existir na arvore e seu tamanho for menor que
+                *   a palavra ja inserida um novo no sera criado a esquerda.
+                *   E entao inserido a linha em que ele aparece.
+                */
                 aux2 = aux2->esquerda;
 
                 if(!aux2){
@@ -60,14 +77,15 @@ struct arvore* insereAVL(struct arvore *aux1, char palavra[32], int linha)
                     aux2->cont++; 
 
                     break;
-                }
-                else{
+                } else {
                     aux1 = aux2;
                 }
-            }
-
-            else{
-
+            } else {
+                /* 
+                *   Se a palavra nao existir na arvore e seu tamanho for maior que
+                *   a palavra ja inserida um novo no sera criado a direita.
+                *   E entao inserido a linha em que ele aparece.
+                */
                 aux2 = aux2->direita;
 
                 if(!aux2){
@@ -87,16 +105,20 @@ struct arvore* insereAVL(struct arvore *aux1, char palavra[32], int linha)
                     //aux2->palavra = palavra;
                     aux2-> linha[aux2 -> cont] = linha;
                     aux2->cont++; 
+                    
                     break;
-                }
-
-                else{
+                } else {
                     aux1 = aux2;
                 }
             }
         }
     }
 
+    /* 
+    *   Faz uma verificação dos FBs dos nos da arvore para ver se
+    *   eh necessario fazer o balanceamento. Se sim, a arvore eh
+    *   balanceada.
+    */
     if(aux2){
         while(aux2){
             aux2->fb = alturaAVL(aux2->direita) - alturaAVL(aux2->esquerda);
@@ -104,17 +126,17 @@ struct arvore* insereAVL(struct arvore *aux1, char palavra[32], int linha)
             if(aux2->fb > 1 || aux2->fb < -1){
                 aux2 = balanceiaAVL(aux2);
             }
-
             aux2 = aux2->pai;
         }
     }
-
     return aux1;
 }
 
-
+/*
+*   Metodo para exibir a arvore de forma ordenada.
+*   Para tal eh usado o metodo.
+*/
 void exibir_ordenadoAVL(struct arvore *aux){
-    
     if(!aux){
         return;
     }
@@ -129,10 +151,11 @@ void exibir_ordenadoAVL(struct arvore *aux){
         printf("\n");
         exibir_ordenadoAVL(aux->direita);
     }
-   
 }
 
-
+/*
+*   Metodo para exibir a AVL.
+*/
 void imprimeAVL(struct arvore *aux, int nivel)
 {
     int i;
@@ -146,23 +169,29 @@ void imprimeAVL(struct arvore *aux, int nivel)
 
 }
 
+/*
+*   Metodo de busca na arvore AVL.
+*   Eh usado a palavra que deseja encontrar.
+*/
 struct arvore* buscaAVL(struct arvore *aux, char* palavra){
 
     aux = raiz;
     if (aux == NULL)
         return NULL;
 
-    if (strcmp(palavra, aux->palavra) == 0)
+    if (strcmp(palavra, aux->palavra) == 0) /* Se a palavra for encontrada retorna. */
         return (aux);
 
-    if (strcmp(palavra,(aux)->palavra) < 0)
+    if (strcmp(palavra,(aux)->palavra) < 0) /* Usa a recursividade para andar pela arvore. */
         return buscaAVL((aux->esquerda), palavra);
     
     else 
         return buscaAVL(aux->direita, palavra);
 }
 
-
+/*
+*   Metodo para calcular a altura da arvore AVL.
+*/
 int alturaAVL(struct arvore *aux){
     if(!aux){
         return 0;
@@ -174,6 +203,10 @@ int alturaAVL(struct arvore *aux){
     return (ae > ad) ? ae + 1: ad + 1;
 }
 
+/*
+*   Metodo para fazer a rotacao para a direita,
+*   usado no balanceamento da arvore AVL.
+*/
 struct arvore* rot_direitaAVL(struct arvore *aux){
     struct arvore *esquerda = aux->esquerda;
 
@@ -206,6 +239,10 @@ struct arvore* rot_direitaAVL(struct arvore *aux){
     return esquerda;
 }
 
+/*
+*   Metodo para fazer a rotacao para a esquerda,
+*   usado no balanceamento da arvore AVL.
+*/
 struct arvore* rot_esquerdaAVL(struct arvore *aux){
     struct arvore *direita = aux->direita;
 
@@ -237,6 +274,11 @@ struct arvore* rot_esquerdaAVL(struct arvore *aux){
     return direita;
 }
 
+/*
+*   Metodo para fazer o balanceamento da arvore AVL
+*   quando necessario, usando as rotacoes para a 
+*   direita e esquerda.
+*/
 struct arvore* balanceiaAVL(struct arvore *aux){
    
     if(aux->fb < -1){
@@ -257,6 +299,3 @@ struct arvore* balanceiaAVL(struct arvore *aux){
 
     return aux;
 }
-
-
-

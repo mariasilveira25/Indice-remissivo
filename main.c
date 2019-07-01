@@ -1,3 +1,12 @@
+/*
+*	Trabalho II de Estrutura de Dados I
+*
+*	Indice Remissivo
+*
+*	Alunos: Elias Eduardo Silva Rodrigues, 0015920
+*			Maria Eduarda da Silveira,     0035483
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,13 +17,15 @@
 #include"ABB.h"
 #define TAM_MAX 100000
 
+/*
+*	Compara as palavras encontradas no texto.
+*/
 int compara(char* ptr, int cont_linha)
 {
 	// FILE* arqPalavra = fopen("palavras.txt", "rt");
-	FILE* arqPalavra = fopen("chave.txt", "rt");
+	FILE* arqPalavra = fopen("chave2.txt", "rt");
 	char texto_str[256];
 
-	
 	int soma=0, soma2=0;
 	while(fgets(texto_str, 256, arqPalavra) != NULL) 
 	{
@@ -45,6 +56,9 @@ int compara(char* ptr, int cont_linha)
 	return 1;
 }
 
+/*
+*	Copia uma palavra para outra.
+*/
 void copy_string(char *target, char *source) {
 	while (*source) {
 		*target = *source;
@@ -54,6 +68,9 @@ void copy_string(char *target, char *source) {
 	*target = '\0';
 }
 
+/*
+*	Executa todas as estruturas criadas.
+*/
 double rodaEstrutura(int numEstrutura, char* arqEntrada) {
 
 	char delim[] = " ";
@@ -135,46 +152,51 @@ double rodaEstrutura(int numEstrutura, char* arqEntrada) {
 			ptr = strtok(NULL, delim);
 		}
 	}
+	// printf("Número de inserções %d\n",numInsercoes );
+	// imprimeHASH(HASH);s
 	fclose(arqtexto);
 	return tempo/numInsercoes;
 
 } 
 
+/*
+*	Codigo principal onde eh executado o programa.
+*/
 int main(int argc, char const *argv[])
 {
 
 	FILE *arqSaida = fopen("saida.txt","w");
-	int numInteracoes = 100;
+	int numInteracoes = 50;
 	double somaLISTA = 0;
 	double somaABB = 0;
 	double somaAVL = 0;
 	double somaHASH = 0;
 	char* arqEntrada = "teste.txt";
 
-	// ##################################################################### //
-	fprintf(arqSaida, "\n########### LISTA ###########\n");
-	for (int i = 0; i < numInteracoes; i++) {
-		somaLISTA += rodaEstrutura(2, arqEntrada);
-	}
-	fprintf(arqSaida, "Tempo gasto para a lista: %g ms.\n", somaLISTA/numInteracoes);
+	//##################################################################### //
+	// fprintf(arqSaida, "\n########### LISTA ###########\n");
+	// for (int i = 0; i < numInteracoes; i++) {
+	// 	somaLISTA += rodaEstrutura(2, arqEntrada);
+	// }
+	// fprintf(arqSaida, "Tempo gasto para a lista: %g ms.\n", somaLISTA/numInteracoes);
 
-	printf("\n########### LISTA ###########\n");
-	printf("Tempo gasto para a lista: %g ms.\n", somaLISTA/numInteracoes);
+	// printf("\n########### LISTA ###########\n");
+	// printf("Tempo gasto para a lista: %g ms.\n", somaLISTA/numInteracoes);
 	// exibeLISTA(lista);
 	
-	// ##################################################################### //
-	fprintf(arqSaida, "\n########### ABB ###########\n");
-	for (int i = 0; i < numInteracoes; i++) {
-		somaABB += rodaEstrutura(1, arqEntrada);
-	}
-	fprintf(arqSaida, "Tempo gasto para a árvore binária (ABB): %g ms.\n", somaABB/numInteracoes);
+	// // ##################################################################### //
+	// fprintf(arqSaida, "\n########### ABB ###########\n");
+	// for (int i = 0; i < numInteracoes; i++) {
+	// 	somaABB += rodaEstrutura(1, arqEntrada);
+	// }
+	// fprintf(arqSaida, "Tempo gasto para a árvore binária (ABB): %g ms.\n", somaABB/numInteracoes);
 
-	printf("\n########### ABB ###########\n");
-	printf("Tempo gasto para a arvore binaria: %g ms.\n", somaABB/numInteracoes);
+	// printf("\n########### ABB ###########\n");
+	// printf("Tempo gasto para a arvore binaria: %g ms.\n", somaABB/numInteracoes);
 	// emordemABB(raizABB);
 	// imprimeABB(raizABB,0);
 
-	// ##################################################################### //
+	// // ##################################################################### //
 
 	fprintf(arqSaida, "\n############### AVL ##############\n");
 	for (int i = 0; i < numInteracoes; i++) {
@@ -184,22 +206,21 @@ int main(int argc, char const *argv[])
 	
 	printf("\n############### AVL ##############\n");
 	printf("Tempo gasto para a AVL: %g ms.\n", somaAVL/numInteracoes);
-	// exibir_ordenadoAVL(raiz);
+	// // exibir_ordenadoAVL(raiz);
 
 	// ##################################################################### //
 	
-	fprintf(arqSaida, "\n #################### HASH ####################\n");
-	for (int i = 0; i < numInteracoes; i++) {
-		somaHASH += rodaEstrutura(4, arqEntrada);
-	}
-	fprintf(arqSaida, "Tempo gasto para a HASH: %g ms.\n", somaHASH/numInteracoes);
+	// fprintf(arqSaida, "\n #################### HASH ####################\n");
+	// for (int i = 0; i < numInteracoes; i++) {
+	// 	somaHASH += rodaEstrutura(4, arqEntrada);
+	// }
+	// fprintf(arqSaida, "Tempo gasto para a HASH: %g ms.\n", somaHASH/numInteracoes);
 	
-	printf("\n #################### HASH ####################\n");
-	printf("Tempo gasto para a HASH: %g ms.\n", somaHASH/numInteracoes);
+	// printf("\n #################### HASH ####################\n");
+	// printf("Tempo gasto para a HASH: %g ms.\n", somaHASH/numInteracoes);
 	// imprimeHASH(HASH);
-	printf("\n");
+	// printf("\n");
 
 	fclose(arqSaida);
 	return 0;
-
 }
